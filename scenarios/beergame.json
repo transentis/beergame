@@ -1,0 +1,48 @@
+{
+  "ABMsmBeergame": {
+    "type": "abm",
+    "name": "beergame",
+    "model" : "code.beergame.Beergame",
+
+    "scenarios": {
+      "scenarioBeergame": {
+        "runspecs": {
+          "starttime": 1,
+          "stoptime": 24,
+          "dt": 1.0
+        },
+        "properties": [
+
+        ],
+        "agents": [
+          {
+            "name": "customer",
+            "count": 1,
+            "step": 1
+          },
+          {
+            "name": "retailer",
+            "count": 1,
+            "step": 1
+          },
+          {
+            "name": "wholesaler",
+            "count": 1,
+            "step": 1
+          },
+          {
+            "name": "distributor",
+            "count": 1,
+            "step": 1
+          },
+          {
+            "name": "brewery",
+            "count": 1,
+            "step": 1
+          }
+
+        ]
+      }
+    }
+  }
+}
