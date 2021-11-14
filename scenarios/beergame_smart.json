@@ -2,7 +2,7 @@
   "smSmartBeergame": {
     "type": "abm",
     "name": "beergame",
-    "model": "src.smart.beergame.Beergame",
+    "model": "src.abm.smart.beergame.Beergame",
     "scenarios": {
      "ignore_backorder": {
         "runspecs": {

@@ -47,18 +47,18 @@ def event_handler_inventory_adjustment_time(change):
     update_graphs(wdg_ignore_backorders.value, wdg_include_supply_line.value, change.new)
     
 def update_graphs(ignore_backorders, include_supply_line, inventory_adjustment_time):
-    scenario= bptk.get_scenario("smBeergameSD","interactiveScenario")
+    scenario= bptk.get_scenario("sd_dsl_beergame","interactive_scenario")
 
-    scenario.constants["policySettings.sophisticatedOrderDecisionOn"] = 1 if ignore_backorders else 0
-    scenario.constants["policySettings.weightingOpenOrders"] = 1 if include_supply_line else 0
-    scenario.constants["policySettings.stockAdjustmentTime"]=inventory_adjustment_time
+    scenario.constants["policy_settings.sophisticated_order_decision_on"] = 1 if ignore_backorders else 0
+    scenario.constants["policy_settings.weighting_open_orders"] = 1 if include_supply_line else 0
+    scenario.constants["policy_settings.stock_adjustment_time"]=inventory_adjustment_time
    
 
 
     wdg_include_supply_line.layout.visibility = 'visible' if ignore_backorders else 'hidden'
     wdg_inventory_adjustment_time.layout.visibility = 'visible' if ignore_backorders else 'hidden'
     
-    bptk.reset_simulation_model(scenario_manager="smBeergameSD", scenario="interactiveScenario")
+    bptk.reset_scenario_cache(scenario_manager="sd_dsl_beergame", scenario="interactive_scenario")
 
     out1.clear_output(wait=True)
     out2.clear_output(wait=True)
@@ -72,24 +72,24 @@ def update_graphs(ignore_backorders, include_supply_line, inventory_adjustment_t
         
         # create the plot, but don't show it yet
         plot1=bptk.plot_scenarios(
-            scenario_managers=["smBeergameSD"],
-            scenarios=["interactiveScenario"],
+            scenario_managers=["sd_dsl_beergame"],
+            scenarios=["interactive_scenario"],
             title="Order Behaviour",
             x_label="Weeks",
             y_label="Beer Ordered",
             equations=[
-                "brewery.actualProduction",
-                "distributor.actualOrder",
-                "wholesaler.actualOrder",
-                "retailer.actualOrder", 
-                "retailer.incomingOrder"
+                "brewery.sending_orders",
+                "distributor.sending_orders",
+                "wholesaler.sending_orders",
+                "retailer.sending_orders",
+                "consumer.sending_orders"
             ],
              series_names={
-                "smBeergameSD_interactiveScenario_brewery.actualProduction" : "Brewery",
-                "smBeergameSD_interactiveScenario_distributor.actualOrder" : "Distributor",
-                "smBeergameSD_interactiveScenario_wholesaler.actualOrder": "Wholesaler",
-                "smBeergameSD_interactiveScenario_retailer.actualOrder": "Retailer",
-                "smBeergameSD_interactiveScenario_retailer.incomingOrder": "Consumer"
+                         "sd_dsl_beergame_interactive_scenario_brewery.sending_orders" : "Brewery",
+        "sd_dsl_beergame_interactive_scenario_distributor.sending_orders" : "Distributor",
+        "sd_dsl_beergame_interactive_scenario_wholesaler.sending_orders": "Wholesaler",
+        "sd_dsl_beergame_interactive_scenario_retailer.sending_orders": "Retailer",
+        "sd_dsl_beergame_interactive_scenario_consumer.sending_orders": "Consumer"
             }
         )
         # show the plot
@@ -100,8 +100,8 @@ def update_graphs(ignore_backorders, include_supply_line, inventory_adjustment_t
     with out2:
         plt.ioff()
         plot2=bptk.plot_scenarios(
-            scenario_managers=["smBeergameSD"],
-            scenarios=["interactiveScenario"],
+            scenario_managers=["sd_dsl_beergame"],
+            scenarios=["interactive_scenario"],
             title="Surplus",
             x_label="Weeks",
             y_label="Beer Ordered",
@@ -112,10 +112,10 @@ def update_graphs(ignore_backorders, include_supply_line, inventory_adjustment_t
                 "retailer.surplus"
             ],
             series_names={
-                "smBeergameSD_interactiveScenario_brewery.surplus" : "Brewery",
-                "smBeergameSD_interactiveScenario_distributor.surplus" : "Distributor",
-                "smBeergameSD_interactiveScenario_wholesaler.surplus": "Wholesaler",
-                "smBeergameSD_interactiveScenario_retailer.surplus": "Retailer"
+                "sd_dsl_beergame_interactive_scenario_brewery.surplus" : "Brewery",
+                "sd_dsl_beergame_interactive_scenario_distributor.surplus" : "Distributor",
+                "sd_dsl_beergame_interactive_scenario_wholesaler.surplus": "Wholesaler",
+                "sd_dsl_beergame_interactive_scenario_retailer.surplus": "Retailer"
             }
         )
         plt.show(plot2)
@@ -124,19 +124,19 @@ def update_graphs(ignore_backorders, include_supply_line, inventory_adjustment_t
     with out3:
         plt.ioff()
         plot3=bptk.plot_scenarios(
-            scenario_managers=["smBeergameSD"],
+            scenario_managers=["sd_dsl_beergame"],
             kind="area",
-            scenarios=["interactiveScenario"],
+            scenarios=["interactive_scenario"],
             title="Retailer Cost",
             x_label="Weeks",
             y_label="USD",
             equations=[
-                "performanceControlling.retailerCostAcc",
-                "policySettings.targetRetailerCost"
+                "performance_controlling.total_retailer_cost",
+                "policy_settings.target_retailer_cost"
             ],
             series_names={
-                "smBeergameSD_interactiveScenario_performanceControlling.retailerCostAcc" : "Accumlated Retailer Cost",
-                "smBeergameSD_interactiveScenario_policySettings.targetRetailerCost" : "Target Retailer Cost"
+                "sd_dsl_beergame_interactive_scenario_performance_controlling.total_retailer_cost" : "Total Retailer Cost",
+                "sd_dsl_beergame_interactive_scenario_policy_settings.target_retailer_cost" : "Target Retailer Cost"
             }
             
         )
@@ -146,19 +146,19 @@ def update_graphs(ignore_backorders, include_supply_line, inventory_adjustment_t
     with out4:
         plt.ioff()
         plot4=bptk.plot_scenarios(
-            scenario_managers=["smBeergameSD"],
+            scenario_managers=["sd_dsl_beergame"],
             kind="area",
-            scenarios=["interactiveScenario"],
+            scenarios=["interactive_scenario"],
             title="Total Cost",
             x_label="Weeks",
             y_label="USD",
             equations=[
-                "performanceControlling.supplyChainCostAcc",
-                "policySettings.targetSupplyChainCost"
+                "performance_controlling.total_supply_chain_cost",
+                "policy_settings.target_supply_chain_cost"
             ],
             series_names={
-                "smBeergameSD_interactiveScenario_performanceControlling.supplyChainCostAcc" : "Accumlated Supply Chain Cost",
-                "smBeergameSD_interactiveScenario_policySettings.targetSupplyChainCost" : "Target Supply Chain Cost"
+                "sd_dsl_beergame_interactive_scenario_performance_controlling.total_supply_chain_cost" : "Total Supply Chain Cost",
+                "sd_dsl_beergame_interactive_scenario_policy_settings.target_supply_chain_cost" : "Target Supply Chain Cost"
             }
         )
         plt.show(plot4)

@@ -2,7 +2,7 @@
   "smBeergameQlOB": {
     "type": "abm",
     "name": "beergame",
-    "model" : "src.q_learning_ob.beergame.BeergameQlOB",
+    "model" : "src.abm.q_learning_ob.beergame.BeergameQlOB",
     "scenarios": {
       "train_agents": {
         "runspecs": {

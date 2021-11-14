@@ -3,12 +3,10 @@ data/*.pickle
 .ipynb_checkpoints
 .idea
 bptk_py.log
-src/__pycache__
-src/base/__pycache__
-src/smart/__pycache__
-src/q_learning_base/__pycache__
-src/q_learning_sp/__pycache__
-src/q_learning_ob/__pycache__
-src/q_learning_follower/__pycache__
-simulation_models/__pycache__
+__pycache__
 export
+
+# Elastic Beanstalk Files
+#rest-api/.elasticbeanstalk/*
+#!rest-api/.elasticbeanstalk/*.cfg.yml
+#!rest-api/.elasticbeanstalk/*.global.yml

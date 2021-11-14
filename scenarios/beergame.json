@@ -2,7 +2,7 @@
   "smBeergame": {
     "type": "abm",
     "name": "beergame",
-    "model" : "src.base.beergame.Beergame",
+    "model" : "src.abm.base.beergame.Beergame",
 
     "scenarios": {
             "steady": {

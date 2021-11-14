@@ -1,6 +1,6 @@
 import pickle
 import json
-from BPTK_Py.abm import Model
+from BPTK_Py import Model
 from BPTK_Py import Event
 from ..base.distributor import Distributor
 from ..base.wholesaler import Wholesaler

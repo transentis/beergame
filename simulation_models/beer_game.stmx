@@ -5,15 +5,15 @@
 		<name>beer_game</name>
 		<uuid>8748d3d3-c18d-43fd-ba09-910472d1bbe2</uuid>
 		<vendor>isee systems, inc.</vendor>
-		<product version="1.9.2" isee:build_number="1907" isee:saved_by_v1="true" lang="en">Stella Architect</product>
+		<product version="2.1" isee:build_number="2324" isee:saved_by_v1="true" lang="en">Stella Architect</product>
 	</header>
-	<sim_specs isee:simulation_delay="0" isee:restore_on_start="false" method="Euler" time_units="Weeks" isee:instantaneous_flows="false">
+	<sim_specs isee:sim_duration="0" isee:simulation_delay="0" isee:restore_on_start="false" method="Euler" time_units="Weeks" isee:instantaneous_flows="false" isee:loop_scores="true" isee:loop_exhaustive_allowed="1000">
 		<start>1</start>
 		<stop>24</stop>
 		<dt>1</dt>
 	</sim_specs>
-	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" saved_runs="5" keep="false" rifp="false"/>
-	<isee:multiplayer_settings include_chat="true" allow_observers="false" advance_time_increment="1" observer_start_page="home_page" enabled="false"/>
+	<isee:prefs show_module_prefix="true" live_update_on_drag="true" show_restore_buttons="false" layer="model" interface_scale_ui="true" interface_max_page_width="10000" interface_max_page_height="10000" interface_min_page_width="0" interface_min_page_height="0" rerun_on_structure_change="false" saved_runs="5" keep="false" rifp="false"/>
+	<isee:multiplayer_settings include_chat="true" allow_observers="false" advance_time_increment="1" max_advance_time_in_ms="0" observer_start_page="home_page" enabled="false"/>
 	<isee:time_formats default_format="Builtin">
 		<isee:time_format name="Builtin" type="adaptive"/>
 		<isee:time_format name="Number Not Scaled With Precision of 1" precision="1" scale_by="1" type="number"/>
@@ -24,316 +24,272 @@
 	</isee:sensi_specs_list>
 	<model_units/>
 	<model>
-		<isee:extra_collection_variables>
-			<isee:extra_collection_variable name="Outgoing_Delivery_Rate"/>
-			<isee:extra_collection_variable name="Incoming_Delivery"/>
-			<isee:extra_collection_variable name="Surplus"/>
-			<isee:extra_collection_variable name="Inventory"/>
-			<isee:extra_collection_variable name="Order_Decision"/>
-			<isee:extra_collection_variable name="Incoming_Order"/>
-			<isee:extra_collection_variable name="Incoming_Order"/>
-			<isee:extra_collection_variable name="Incoming_Orders"/>
-			<isee:extra_collection_variable name="Backorder"/>
-			<isee:extra_collection_variable name="Backorder"/>
-			<isee:extra_collection_variable name="Backorder"/>
-			<isee:extra_collection_variable name="Incoming_Delivery_Rate"/>
-			<isee:extra_collection_variable name="Inventory"/>
-			<isee:extra_collection_variable name="Outgoing_Delivery_Rate"/>
-			<isee:extra_collection_variable name="retailer_cost"/>
-			<isee:extra_collection_variable name="Open_Orders"/>
-			<isee:extra_collection_variable name="Incoming_Delivery"/>
-			<isee:extra_collection_variable name="Order_Decision"/>
-			<isee:extra_collection_variable name="Incoming_Order"/>
-			<isee:extra_collection_variable name="Backorder"/>
-			<isee:extra_collection_variable name="Incoming_Orders"/>
-			<isee:extra_collection_variable name="Incoming_Orders"/>
-			<isee:extra_collection_variable name="Surplus"/>
-			<isee:extra_collection_variable name="Deliveries"/>
-			<isee:extra_collection_variable name="Deliveries"/>
-			<isee:extra_collection_variable name="Incoming_Orders"/>
-			<isee:extra_collection_variable name="Outgoing_Delivery"/>
-			<isee:extra_collection_variable name="Deliveries"/>
-			<isee:extra_collection_variable name="Outgoing_Delivery_Rate"/>
-			<isee:extra_collection_variable name="Inventory"/>
-			<isee:extra_collection_variable name="Inventory"/>
-			<isee:extra_collection_variable name="Order_Decision"/>
-			<isee:extra_collection_variable name="Deliveries"/>
-			<isee:extra_collection_variable name="Surplus"/>
-			<isee:extra_collection_variable name="Supply_Chain_Cost_Acc"/>
-			<isee:extra_collection_variable name="Outgoing_Delivery_Rate"/>
-			<isee:extra_collection_variable name="Surplus"/>
-			<isee:extra_collection_variable name="Order_Decision"/>
-			<isee:extra_collection_variable name="Outgoing_Delivery"/>
-			<isee:extra_collection_variable name="Incoming_Order"/>
-			<isee:extra_collection_variable name="Retailer_Cost_Acc"/>
-			<isee:extra_collection_variable name="Incoming_Order_Rate"/>
-		</isee:extra_collection_variables>
 		<variables>
 			<module name="Retailer" isee:label="">
-				<connect to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
-				<connect2 to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
-				<connect to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
-				<connect2 to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
-				<connect to="Retailer.Delivery_Rate" from="Wholesaler.Outgoing_Delivery_Rate"/>
-				<connect2 to="Retailer.Delivery_Rate" from="Wholesaler.Outgoing_Delivery_Rate"/>
-				<connect to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
-				<connect2 to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
-				<connect to="Retailer.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
-				<connect2 to="Retailer.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
 				<connect to="Wholesaler.Converter_4" from="Retailer.Actual_Order"/>
 				<connect2 to="Wholesaler.Converter_4" from="Retailer.Actual_Order"/>
-				<connect to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect2 to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect2 to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
+				<connect2 to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
+				<connect to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
+				<connect2 to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
 				<connect to="Retailer.Converter_1" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Retailer.Converter_1" from="Policy_Settings.Target_Inventory"/>
+				<connect to="Retailer.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
+				<connect2 to="Retailer.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
+				<connect to="Retailer.Delivery_Rate" from="Wholesaler.Outgoing_Delivery_Rate"/>
+				<connect2 to="Retailer.Delivery_Rate" from="Wholesaler.Outgoing_Delivery_Rate"/>
+				<connect to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
+				<connect2 to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
+				<connect to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect2 to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
 				<connect to="Retailer.Rise_in_Order" from="Policy_Settings.Rise_in_Order"/>
 				<connect2 to="Retailer.Rise_in_Order" from="Policy_Settings.Rise_in_Order"/>
+				<connect to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
+				<connect2 to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
+				<connect to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect2 to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect2 to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
 				<connect to="Retailer.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect2 to="Retailer.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect to="Retailer.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
 				<connect2 to="Retailer.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
-				<connect2 to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
-				<connect to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect2 to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
 			</module>
 			<module name="Wholesaler" isee:label="">
+				<connect to="Distributor.Converter_4" from="Wholesaler.Actual_Order"/>
+				<connect2 to="Distributor.Converter_4" from="Wholesaler.Actual_Order"/>
+				<connect to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
+				<connect2 to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
 				<connect to="Performance_Controlling.Wholesaler_Inventory" from="Wholesaler.Inventory"/>
 				<connect2 to="Performance_Controlling.Wholesaler_Inventory" from="Wholesaler.Inventory"/>
 				<connect to="Retailer.Delivery_Rate" from="Wholesaler.Outgoing_Delivery_Rate"/>
 				<connect2 to="Retailer.Delivery_Rate" from="Wholesaler.Outgoing_Delivery_Rate"/>
-				<connect to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
-				<connect2 to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
 				<connect to="Wholesaler.Converter_2" from="Distributor.Outgoing_Delivery_Rate"/>
 				<connect2 to="Wholesaler.Converter_2" from="Distributor.Outgoing_Delivery_Rate"/>
-				<connect to="Distributor.Converter_4" from="Wholesaler.Actual_Order"/>
-				<connect2 to="Distributor.Converter_4" from="Wholesaler.Actual_Order"/>
-				<connect to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
 				<connect to="Wholesaler.Converter_3" from="Policy_Settings.Delivery_Delay"/>
 				<connect2 to="Wholesaler.Converter_3" from="Policy_Settings.Delivery_Delay"/>
-				<connect to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect2 to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
 				<connect to="Wholesaler.Converter_4" from="Retailer.Actual_Order"/>
 				<connect2 to="Wholesaler.Converter_4" from="Retailer.Actual_Order"/>
-				<connect to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect2 to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
 				<connect to="Wholesaler.Converter_5" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Wholesaler.Converter_5" from="Policy_Settings.Target_Inventory"/>
+				<connect to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect2 to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect2 to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect2 to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
 				<connect to="Wholesaler.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect2 to="Wholesaler.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect to="Wholesaler.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
 				<connect2 to="Wholesaler.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect2 to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
 			</module>
 			<module name="Brewery" isee:label="">
+				<connect to="Performance_Controlling.Brewery_Backorder" from="Brewery.Backorder"/>
+				<connect2 to="Performance_Controlling.Brewery_Backorder" from="Brewery.Backorder"/>
 				<connect to="Performance_Controlling.Brewery_Inventory" from="Brewery.Inventory"/>
 				<connect2 to="Performance_Controlling.Brewery_Inventory" from="Brewery.Inventory"/>
 				<connect to="Distributor.Converter_3" from="Brewery.Outgoing_Delivery_Rate"/>
 				<connect2 to="Distributor.Converter_3" from="Brewery.Outgoing_Delivery_Rate"/>
-				<connect to="Performance_Controlling.Brewery_Backorder" from="Brewery.Backorder"/>
-				<connect2 to="Performance_Controlling.Brewery_Backorder" from="Brewery.Backorder"/>
 				<connect to="Brewery.Actual_Order" from="Distributor.Actual_Order"/>
 				<connect2 to="Brewery.Actual_Order" from="Distributor.Actual_Order"/>
-				<connect to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
-				<connect2 to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
-				<connect to="Brewery.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect2 to="Brewery.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Brewery.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect2 to="Brewery.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
 				<connect to="Brewery.Converter_1" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Brewery.Converter_1" from="Policy_Settings.Target_Inventory"/>
+				<connect to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
+				<connect2 to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
+				<connect to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Brewery.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect2 to="Brewery.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Brewery.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect2 to="Brewery.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect to="Brewery.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect2 to="Brewery.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
 				<connect to="Brewery.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect2 to="Brewery.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect to="Brewery.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
 				<connect2 to="Brewery.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Brewery.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect2 to="Brewery.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
 			</module>
 			<module name="Distributor" isee:label="">
+				<connect to="Brewery.Actual_Order" from="Distributor.Actual_Order"/>
+				<connect2 to="Brewery.Actual_Order" from="Distributor.Actual_Order"/>
+				<connect to="Performance_Controlling.Distributor_Delivery_Shortfall" from="Distributor.Backorder"/>
+				<connect2 to="Performance_Controlling.Distributor_Delivery_Shortfall" from="Distributor.Backorder"/>
 				<connect to="Performance_Controlling.Distributor_Inventory" from="Distributor.Inventory"/>
 				<connect2 to="Performance_Controlling.Distributor_Inventory" from="Distributor.Inventory"/>
 				<connect to="Wholesaler.Converter_2" from="Distributor.Outgoing_Delivery_Rate"/>
 				<connect2 to="Wholesaler.Converter_2" from="Distributor.Outgoing_Delivery_Rate"/>
-				<connect to="Performance_Controlling.Distributor_Delivery_Shortfall" from="Distributor.Backorder"/>
-				<connect2 to="Performance_Controlling.Distributor_Delivery_Shortfall" from="Distributor.Backorder"/>
 				<connect to="Distributor.Converter_3" from="Brewery.Outgoing_Delivery_Rate"/>
 				<connect2 to="Distributor.Converter_3" from="Brewery.Outgoing_Delivery_Rate"/>
-				<connect to="Brewery.Actual_Order" from="Distributor.Actual_Order"/>
-				<connect2 to="Brewery.Actual_Order" from="Distributor.Actual_Order"/>
 				<connect to="Distributor.Converter_4" from="Wholesaler.Actual_Order"/>
 				<connect2 to="Distributor.Converter_4" from="Wholesaler.Actual_Order"/>
-				<connect to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
 				<connect to="Distributor.Converter_5" from="Policy_Settings.Delivery_Delay"/>
 				<connect2 to="Distributor.Converter_5" from="Policy_Settings.Delivery_Delay"/>
-				<connect to="Distributor.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect2 to="Distributor.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Distributor.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect2 to="Distributor.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
 				<connect to="Distributor.Converter_6" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Distributor.Converter_6" from="Policy_Settings.Target_Inventory"/>
+				<connect to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Distributor.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect2 to="Distributor.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Distributor.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect2 to="Distributor.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect to="Distributor.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect2 to="Distributor.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
 				<connect to="Distributor.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect2 to="Distributor.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
 				<connect to="Distributor.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
 				<connect2 to="Distributor.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Distributor.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect2 to="Distributor.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
 			</module>
-			<module name="Performance Controlling" isee:label="">
-				<connect to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
-				<connect2 to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
-				<connect to="Performance_Controlling.Wholesaler_Inventory" from="Wholesaler.Inventory"/>
-				<connect2 to="Performance_Controlling.Wholesaler_Inventory" from="Wholesaler.Inventory"/>
-				<connect to="Performance_Controlling.Distributor_Inventory" from="Distributor.Inventory"/>
-				<connect2 to="Performance_Controlling.Distributor_Inventory" from="Distributor.Inventory"/>
-				<connect to="Performance_Controlling.Brewery_Inventory" from="Brewery.Inventory"/>
-				<connect2 to="Performance_Controlling.Brewery_Inventory" from="Brewery.Inventory"/>
-				<connect to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
-				<connect2 to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
+			<module name="Performance\nControlling" isee:label="">
 				<connect to="Performance_Controlling.Brewery_Backorder" from="Brewery.Backorder"/>
 				<connect2 to="Performance_Controlling.Brewery_Backorder" from="Brewery.Backorder"/>
-				<connect to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
-				<connect2 to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
+				<connect to="Performance_Controlling.Brewery_Inventory" from="Brewery.Inventory"/>
+				<connect2 to="Performance_Controlling.Brewery_Inventory" from="Brewery.Inventory"/>
 				<connect to="Performance_Controlling.Distributor_Delivery_Shortfall" from="Distributor.Backorder"/>
 				<connect2 to="Performance_Controlling.Distributor_Delivery_Shortfall" from="Distributor.Backorder"/>
+				<connect to="Performance_Controlling.Distributor_Inventory" from="Distributor.Inventory"/>
+				<connect2 to="Performance_Controlling.Distributor_Inventory" from="Distributor.Inventory"/>
+				<connect to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
+				<connect2 to="Performance_Controlling.Retail_Backorder" from="Retailer.Backorder"/>
+				<connect to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
+				<connect2 to="Performance_Controlling.Retailer_Inventory" from="Retailer.Inventory"/>
 				<connect to="Performance_Controlling.Target_Inventory" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Performance_Controlling.Target_Inventory" from="Policy_Settings.Target_Inventory"/>
+				<connect to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
+				<connect2 to="Performance_Controlling.Wholesaler_Backorder" from="Wholesaler.Backorder"/>
+				<connect to="Performance_Controlling.Wholesaler_Inventory" from="Wholesaler.Inventory"/>
+				<connect2 to="Performance_Controlling.Wholesaler_Inventory" from="Wholesaler.Inventory"/>
 			</module>
-			<module name="Policy Settings" isee:label="">
-				<connect to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect2 to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
-				<connect to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
-				<connect2 to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
+			<module name="Policy\nSettings" isee:label="">
+				<connect to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
+				<connect2 to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
+				<connect to="Distributor.Converter_5" from="Policy_Settings.Delivery_Delay"/>
+				<connect2 to="Distributor.Converter_5" from="Policy_Settings.Delivery_Delay"/>
 				<connect to="Retailer.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
 				<connect2 to="Retailer.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
 				<connect to="Wholesaler.Converter_3" from="Policy_Settings.Delivery_Delay"/>
 				<connect2 to="Wholesaler.Converter_3" from="Policy_Settings.Delivery_Delay"/>
-				<connect to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
-				<connect2 to="Brewery.Delivery_Delay" from="Policy_Settings.Delivery_Delay"/>
-				<connect to="Distributor.Converter_5" from="Policy_Settings.Delivery_Delay"/>
-				<connect2 to="Distributor.Converter_5" from="Policy_Settings.Delivery_Delay"/>
-				<connect to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect2 to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect2 to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
+				<connect2 to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
+				<connect to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Brewery.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Distributor.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Retailer.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect2 to="Wholesaler.Single_Player_Simple_Policy_ON" from="Policy_Settings.Game_Mode_ON"/>
+				<connect to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect2 to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
 				<connect to="Brewery.Order_Delay" from="Policy_Settings.Order_Delay"/>
 				<connect2 to="Brewery.Order_Delay" from="Policy_Settings.Order_Delay"/>
 				<connect to="Distributor.Order_Delay" from="Policy_Settings.Order_Delay"/>
 				<connect2 to="Distributor.Order_Delay" from="Policy_Settings.Order_Delay"/>
-				<connect to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect2 to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect2 to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect2 to="Retailer.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect2 to="Wholesaler.Order_Delay" from="Policy_Settings.Order_Delay"/>
+				<connect to="Retailer.Rise_in_Order" from="Policy_Settings.Rise_in_Order"/>
+				<connect2 to="Retailer.Rise_in_Order" from="Policy_Settings.Rise_in_Order"/>
+				<connect to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect2 to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
+				<connect to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
+				<connect2 to="Retailer.Steady_State_ON" from="Policy_Settings.Steady_State_ON"/>
 				<connect to="Brewery.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
 				<connect2 to="Brewery.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
 				<connect to="Distributor.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
 				<connect2 to="Distributor.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
-				<connect to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect2 to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
-				<connect to="Retailer.Converter_1" from="Policy_Settings.Target_Inventory"/>
-				<connect2 to="Retailer.Converter_1" from="Policy_Settings.Target_Inventory"/>
-				<connect to="Wholesaler.Converter_5" from="Policy_Settings.Target_Inventory"/>
-				<connect2 to="Wholesaler.Converter_5" from="Policy_Settings.Target_Inventory"/>
+				<connect to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect2 to="Retailer.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
+				<connect2 to="Wholesaler.Stock_Adjustment_Time" from="Policy_Settings.Stock_Adjustment_Time"/>
 				<connect to="Brewery.Converter_1" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Brewery.Converter_1" from="Policy_Settings.Target_Inventory"/>
 				<connect to="Distributor.Converter_6" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Distributor.Converter_6" from="Policy_Settings.Target_Inventory"/>
 				<connect to="Performance_Controlling.Target_Inventory" from="Policy_Settings.Target_Inventory"/>
 				<connect2 to="Performance_Controlling.Target_Inventory" from="Policy_Settings.Target_Inventory"/>
-				<connect to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Retailer.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Wholesaler.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Brewery.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect2 to="Distributor.Sophisticated_Order_Decision_ON" from="Policy_Settings.Sophisticated_Order_Decision_ON"/>
-				<connect to="Retailer.Rise_in_Order" from="Policy_Settings.Rise_in_Order"/>
-				<connect2 to="Retailer.Rise_in_Order" from="Policy_Settings.Rise_in_Order"/>
-				<connect to="Retailer.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect2 to="Retailer.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect to="Wholesaler.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect2 to="Wholesaler.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect to="Brewery.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect2 to="Brewery.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect to="Distributor.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect2 to="Distributor.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
-				<connect to="Retailer.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect2 to="Retailer.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Wholesaler.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect2 to="Wholesaler.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Brewery.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect2 to="Brewery.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Distributor.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect2 to="Distributor.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
-				<connect to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect2 to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect2 to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect to="Retailer.Converter_1" from="Policy_Settings.Target_Inventory"/>
+				<connect2 to="Retailer.Converter_1" from="Policy_Settings.Target_Inventory"/>
+				<connect to="Wholesaler.Converter_5" from="Policy_Settings.Target_Inventory"/>
+				<connect2 to="Wholesaler.Converter_5" from="Policy_Settings.Target_Inventory"/>
 				<connect to="Brewery.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
 				<connect2 to="Brewery.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
 				<connect to="Distributor.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
 				<connect2 to="Distributor.Target_Supply_Line_Factor" from="Policy_Settings.Target_Supply_Line_Factor"/>
-				<connect to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
-				<connect2 to="Retailer.Dynamic_Customer_Behaviour_ON" from="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
-				<connect to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Retailer.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Wholesaler.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Brewery.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
-				<connect2 to="Distributor.Multiplayer_Mode_ON" from="Policy_Settings.Multiplayer_Mode_ON"/>
+				<connect to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect2 to="Retailer.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect2 to="Wholesaler.Transit_Averaging_Time" from="Policy_Settings.Target_Supply_Line_Factor"/>
+				<connect to="Brewery.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect2 to="Brewery.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect to="Distributor.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect2 to="Distributor.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect to="Retailer.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect2 to="Retailer.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect to="Wholesaler.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect2 to="Wholesaler.Weight_on_Backorder" from="Policy_Settings.Weighting_Backorder"/>
+				<connect to="Brewery.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect2 to="Brewery.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect to="Distributor.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect2 to="Distributor.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect to="Retailer.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect2 to="Retailer.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect to="Wholesaler.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect2 to="Wholesaler.Weight_on_Inventory" from="Policy_Settings.Weighting_Inventory"/>
+				<connect to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Brewery.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Distributor.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Retailer.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
+				<connect2 to="Wholesaler.Weighting_on_Supply_Line" from="Policy_Settings.Weighting_Open_Orders"/>
 			</module>
 		</variables>
 		<views>
 			<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 				<text_box color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
-				<isee:loop_indicator color="black" background="white"/>
+				<isee:loop_indicator color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
 				<numeric_display color="blue" background="white" font_size="9pt" isee:transparent="false"/>
 				<graph color="black" background="white" font_size="12pt" axis_color="#666666" grid_color="#C8C8C8" isee:graph_area_color="white" legend_position="bottom" isee:transparent="false" isee:hide_border="false" axis_title_font_style="normal" axis_title_font_weight="normal" axis_title_text_decoration="none" axis_title_text_align="center" axis_title_vertical_text_align="center" axis_title_font_color="black" axis_title_font_family="Arial" axis_title_font_size="12pt" axis_title_text_padding="2" axis_title_text_border_color="black" axis_title_text_border_width="thin" axis_title_text_border_style="none" axis_label_font_style="normal" axis_label_font_weight="normal" axis_label_text_decoration="none" axis_label_text_align="center" axis_label_vertical_text_align="center" axis_label_font_color="black" axis_label_font_family="Arial" axis_label_font_size="9pt" axis_label_text_padding="2" axis_label_text_border_color="black" axis_label_text_border_width="thin" axis_label_text_border_style="none">
 					<isee:series_styles>
@@ -353,12 +309,12 @@
 					</isee:series_styles>
 				</graph>
 				<table color="black" background="#E0E0E0" text_align="right" font_size="12pt" orientation="vertical" wrap_text="false" isee:auto_fit="true" isee:use_alternate_row_colors="false" isee:unlimited_table_length="false" blank_column_width="80" column_width="160" interval="1" report_balances="ending" report_flows="summed" header_font_style="normal" header_font_weight="normal" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="12pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
-				<button color="black" background="#E0E0E0" font_size="12pt" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
-				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_background_color="#FFFECF"/>
+				<button color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595"/>
+				<isee:annotation color="black" background="#E0E0E0" font_size="12pt" border_width="thin" border_style="solid" transparent="false" corner_radius="0" isee:flat="false" icon_side="top" isee:highlight_on_hover="false" isee:highlight_color="#959595" popup_corner_radius="0" popup_background_color="#FFFECF"/>
 				<slider color="black" background="#E0E0E0" font_size="12pt" num_ticks="3" label_side="top" wrap_title="true" vertical="false" isee:fancy_appearance="false" isee:show_hover_tip="when_deciding" input_expands="true" input_width="100"/>
 				<isee:sim_speed_slider color="black" background="white"/>
 				<isee:time_slider color="black" background="white"/>
-				<isee:pie_input color="black" background="white" legend_position="bottom" isee:transparent="false"/>
+				<isee:pie_input color="black" background="white" font_size="12pt" legend_position="bottom" isee:transparent="false"/>
 				<knob color="#66CC66" background="#E0E0E0" font_size="12pt" label_side="bottom" wrap_title="true"/>
 				<numeric_input color="black" background="#E0E0E0" font_size="12pt" label_side="left" wrap_title="true" input_expands="false" input_width="100"/>
 				<switch color="black" background="#E0E0E0" font_size="12pt" label_side="top" wrap_title="true" isee:appearance="switch" isee:on_color="green"/>
@@ -366,16 +322,16 @@
 				<graphical_input color="black" background="#E0E0E0" font_size="12pt" isee:show_hover_tip="true"/>
 				<group_input color="black" background="#E0E0E0" font_size="12pt"/>
 				<lamp color="black" background="white" font_size="9pt"/>
-				<gauge color="black" background="white" needle_color="#F09F72" bar_color="#EEEEEE" bar_progress_color="black" appearance="radial" num_major_ticks="11" num_minor_ticks="11" show_numeric_value="true"/>
-				<isee:spatial_map color="black" background="white"/>
-				<isee:animation_object color="black" background="white"/>
-				<isee:navigation_widget color="black" background="white" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
-				<isee:shape color="black" background="white" opacity="1" transparent_background="true"/>
-				<isee:selector color="black" background="white"/>
-				<isee:iframe color="black" background="white"/>
-				<isee:financial_table color="black" background="white" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
+				<gauge color="black" background="white" font_size="9pt" needle_color="#F09F72" bar_color="#EEEEEE" bar_progress_color="black" appearance="radial" num_major_ticks="11" num_minor_ticks="11" show_numeric_value="true"/>
+				<isee:spatial_map color="black" background="white" font_size="12pt"/>
+				<isee:animation_object color="black" background="white" font_size="12pt"/>
+				<isee:navigation_widget color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_color="#999999" border_width="thin" border_style="solid" item_spacing="6" appearance="tabs" corner_radius="4" selected_item_color="black" selected_item_background="white" item_background="#DDDDDD"/>
+				<isee:shape color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid" opacity="1" transparent_background="true"/>
+				<isee:selector color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt"/>
+				<isee:iframe color="black" background="white" text_align="left" vertical_text_align="top" font_size="12pt" border_width="thin" border_style="solid"/>
+				<isee:financial_table color="black" background="white" text_align="right" font_size="12pt" hide_border="false" auto_fit="true" first_column_width="250" other_column_width="100" header_font_style="normal" header_font_weight="bold" header_text_decoration="none" header_text_align="center" header_vertical_text_align="center" header_font_color="black" header_font_family="Arial" header_font_size="14pt" header_text_padding="2" header_text_border_color="black" header_text_border_width="thin" header_text_border_style="none"/>
 			</style>
-			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" background="white" page_width="818" page_height="571" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_family="Geneva" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -472,16 +428,16 @@
 					<from>Brewery</from>
 					<to>Distributor</to>
 				</connector>
-				<module x="590" y="183" name="Retailer"/>
-				<module x="417" y="188" name="Wholesaler"/>
-				<module x="205" y="189" name="Brewery"/>
-				<module x="319" y="188" name="Distributor"/>
-				<module x="374" y="384" name="Performance Controlling"/>
-				<module x="353" y="55" name="Policy Settings"/>
+				<module label_side="center" x="590" y="183" name="Retailer"/>
+				<module label_side="center" x="417" y="188" name="Wholesaler"/>
+				<module label_side="center" x="205" y="189" name="Brewery"/>
+				<module label_side="center" x="319" y="188" name="Distributor"/>
+				<module label_side="center" x="374" y="384" name="Performance\nControlling"/>
+				<module label_side="center" x="353" y="55" name="Policy\nSettings"/>
 			</view>
 			<view background="white" page_width="788" page_height="528" home_view="true" type="interface">
 				<style/>
-				<stacked_container uid="16" x="284" y="19" width="476" height="296" visible_index="10">
+				<stacked_container x="284" y="19" width="476" height="296" visible_index="10">
 					<table background="#E0E0E0" font_size="9pt" orientation="vertical" column_width="194" interval="1" report_balances="beginning" report_flows="summed" width="476" height="296" title="title">
 						<item type="time"/>
 						<item>
@@ -500,7 +456,7 @@
 							<format precision="0.01" scale_by="1" delimit_000s="true"/>
 							<entity name="Retailer.Backorder"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<format precision="0.01" scale_by="1" delimit_000s="true"/>
 							<entity name="Retailer.Inventory"/>
 						</item>
@@ -508,7 +464,7 @@
 							<format precision="0.01" scale_by="1" delimit_000s="true"/>
 							<entity name="Performance_Controlling.retailer_cost"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<format precision="0.01" scale_by="1" delimit_000s="true"/>
 							<entity name="Retailer.Open_Orders"/>
 						</item>
@@ -561,31 +517,31 @@
 					</table>
 					<table width="476" height="296">
 						<item type="time"/>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Brewery.Incoming_Orders"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Distributor.Incoming_Orders"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Wholesaler.Incoming_Orders"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Retailer.Incoming_Orders"/>
 						</item>
 					</table>
 					<table width="476" height="296">
 						<item type="time"/>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Brewery.Deliveries"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Distributor.Deliveries"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Wholesaler.Deliveries"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Retailer.Deliveries"/>
 						</item>
 					</table>
@@ -621,16 +577,16 @@
 					</table>
 					<table width="476" height="296">
 						<item type="time"/>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Brewery.Inventory"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Distributor.Inventory"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Wholesaler.Inventory"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Retailer.Inventory"/>
 						</item>
 					</table>
@@ -659,52 +615,52 @@
 						</item>
 					</table>
 				</stacked_container>
-				<numeric_display uid="17" x="85.5" y="102" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+				<numeric_display x="85.5" y="102" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
 					<format precision="1" scale_by="1"/>
 					<entity name="Retailer.Incoming_Order"/>
 				</numeric_display>
-				<numeric_display uid="18" x="89.5" y="68" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+				<numeric_display x="89.5" y="68" width="177" height="16" isee:immediately_update_on_user_input="true" retain_ending_value="true" isee:navigate_to="false" show_name="true">
 					<format precision="1" scale_by="1" delimit_000s="true"/>
 					<entity name="Retailer.Inventory"/>
 				</numeric_display>
-				<numeric_display uid="19" x="84.5" y="129" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+				<numeric_display x="84.5" y="129" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
 					<format precision="1" scale_by="1" delimit_000s="true"/>
 					<entity name="Retailer.Backorder"/>
 				</numeric_display>
-				<numeric_display uid="20" x="85.5" y="152" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+				<numeric_display x="85.5" y="152" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
 					<format precision="0.1" scale_by="1" delimit_000s="true"/>
 					<entity name="Performance_Controlling.retailer_cost"/>
 				</numeric_display>
-				<numeric_display uid="21" x="81.5" y="42" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
+				<numeric_display x="81.5" y="42" width="177" height="16" retain_ending_value="true" isee:navigate_to="false" show_name="true">
 					<format precision="1" scale_by="1"/>
 					<entity name="Retailer.Incoming_Delivery"/>
 				</numeric_display>
-				<switch color="black" label_side="bottom" uid="22" x="80" y="368" width="38" height="20" show_name="true">
+				<switch color="black" label_side="bottom" x="80" y="368" width="38" height="20" show_name="true">
 					<entity name="Policy_Settings.Steady_State_ON"/>
 					<reset_to after="never">0</reset_to>
 				</switch>
-				<switch color="black" label_side="bottom" uid="23" x="89" y="263" width="38" height="20" show_name="true">
+				<switch color="black" label_side="bottom" x="89" y="263" width="38" height="20" show_name="true">
 					<entity name="Policy_Settings.Sophisticated_Order_Decision_ON"/>
 					<reset_to after="never">0</reset_to>
 				</switch>
-				<switch color="black" label_side="bottom" uid="24" x="97" y="196" width="38" height="20" show_name="true">
+				<switch color="black" label_side="bottom" x="97" y="196" width="38" height="20" show_name="true">
 					<entity name="Policy_Settings.Dynamic_Customer_Behaviour_ON"/>
 					<reset_to after="never">0</reset_to>
 				</switch>
-				<slider uid="25" x="39.5" y="443.5" width="197" height="43" increment="0.01" min="0" max="1" isee:navigate_to="false" show_name="true">
+				<slider x="39.5" y="443.5" width="197" height="43" increment="0.01" min="0" max="1" isee:navigate_to="false" show_name="true">
 					<entity name="Policy_Settings.Weighting_Backorder"/>
 					<reset_to after="never">0</reset_to>
 				</slider>
 			</view>
 			<view background="white" page_width="788" page_height="528" type="interface">
 				<style/>
-				<stacked_container uid="26" x="124" y="74" width="575" height="364">
+				<stacked_container x="124" y="74" width="575" height="364">
 					<table interval="1" report_balances="beginning" report_flows="summed" width="575" height="364">
 						<item type="time"/>
 						<item>
 							<entity name="Retailer.Order_Decision"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Retailer.Inventory"/>
 						</item>
 						<item>
@@ -725,7 +681,7 @@
 						<item>
 							<entity name="Brewery.Order_Decision"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Brewery.Inventory"/>
 						</item>
 						<item>
@@ -739,10 +695,10 @@
 			</view>
 			<view background="white" page_width="788" page_height="528" type="interface">
 				<style/>
-				<stacked_container uid="27" x="50" y="34" width="707" height="447">
+				<stacked_container x="50" y="34" width="707" height="447">
 					<table interval="1" report_balances="beginning" report_flows="summed" width="707" height="447">
 						<item type="time"/>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<entity name="Retailer.Inventory"/>
 						</item>
 						<item>
@@ -751,7 +707,7 @@
 						<item>
 							<entity name="Performance_Controlling.retailer_cost"/>
 						</item>
-						<item>
+						<item isee:immediately_update_on_user_input="true">
 							<format precision="full"/>
 							<entity name="Performance_Controlling.Retailer_Cost_Acc"/>
 						</item>
@@ -877,7 +833,7 @@
 			<aux name="Multiplayer Mode ON" access="input"/>
 		</variables>
 		<views>
-			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="61" isee:scroll_y="152" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_family="Geneva" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1048,7 +1004,7 @@
 					</from>
 					<to>Sophisticated_Order_Decision</to>
 				</connector>
-				<connector uid="67" angle="299.745">
+				<connector uid="67" angle="357.357">
 					<from>Incoming_Delivery_Rate</from>
 					<to>Outgoing_Delivery_Rate</to>
 				</connector>
@@ -1110,7 +1066,7 @@
 					<from>Target_Supply_Line_Factor</from>
 					<to>Target_Supply_Line</to>
 				</connector>
-				<connector uid="85" angle="20.556">
+				<connector uid="85" angle="24.7887">
 					<from>Incoming_Delivery</from>
 					<to>Incoming_Delivery_Rate</to>
 				</connector>
@@ -1148,21 +1104,22 @@
 					</from>
 					<to>Delivery_Policy</to>
 				</connector>
-				<stock x="438" y="167" name="Inventory"/>
-				<flow x="303.5" y="166" name="Incoming Delivery Rate">
+				<stock x="429.5" y="222.5" name="Inventory"/>
+				<flow x="367.25" y="213" name="Incoming Delivery Rate">
 					<pts>
-						<pt x="203.5" y="166"/>
-						<pt x="415.5" y="166"/>
+						<pt x="339.5" y="258"/>
+						<pt x="339.5" y="213"/>
+						<pt x="407" y="213"/>
 					</pts>
 				</flow>
-				<flow x="533" y="164" name="Outgoing Delivery Rate">
+				<flow x="529.75" y="220.5" name="Outgoing Delivery Rate">
 					<pts>
-						<pt x="460.5" y="164"/>
-						<pt x="617.5" y="164"/>
+						<pt x="452" y="220.5"/>
+						<pt x="619.5" y="220.5"/>
 					</pts>
 				</flow>
 				<aux x="870" y="869" name="Production"/>
-				<stock x="640" y="166" name="Deliveries"/>
+				<stock x="642" y="218.5" name="Deliveries"/>
 				<stock x="600" y="386" name="Incoming Orders"/>
 				<flow x="499.25" y="389" name="Incoming Order Rate">
 					<pts>
@@ -1181,11 +1138,12 @@
 				<aux color="blue" font_style="italic" font_weight="bold" x="1155" y="811" name="Single Player Simple Policy ON"/>
 				<aux color="blue" font_style="italic" font_weight="bold" x="177" y="341" name="Delivery Delay"/>
 				<aux x="1311" y="288" name="Sophisticated Order Decision"/>
-				<stock x="181" y="167" name="Open Orders"/>
-				<flow x="97.75" y="169" name="Order Rate">
+				<stock label_side="bottom" x="339.5" y="275.5" name="Open Orders"/>
+				<flow x="194.25" y="150.25" name="Order Rate">
 					<pts>
-						<pt x="37" y="169"/>
-						<pt x="158.5" y="169"/>
+						<pt x="37" y="150.25"/>
+						<pt x="339.5" y="150.25"/>
+						<pt x="339.5" y="258"/>
 					</pts>
 				</flow>
 				<stock x="1363" y="958" name="Order Line"/>
@@ -1376,9 +1334,6 @@
 			<aux name="Expected Order">
 				<eqn>Incoming_Order</eqn>
 			</aux>
-			<aux name="Target Total Stock">
-				<eqn>Converter_6+Target_Supply_Line</eqn>
-			</aux>
 			<aux name="Stock Adjustment Time" access="input"/>
 			<aux name="Naive Order Decision">
 				<eqn>MAX(Weight_on_Inventory*(Converter_6-Inventory)+Weight_on_Backorder*Backorder+Expected_Order,0)</eqn>
@@ -1394,7 +1349,7 @@
 			<aux name="Multiplayer Mode ON" access="input"/>
 		</variables>
 		<views>
-			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="3" isee:page_rows="2" isee:scroll_y="45.625" zoom="160" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_family="Geneva" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1435,7 +1390,7 @@
 					<from>Inventory</from>
 					<to>Outgoing_Delivery_Rate</to>
 				</connector>
-				<connector uid="97" angle="257.471">
+				<connector uid="97" angle="64.0692">
 					<from>Converter_6</from>
 					<to>Naive_Order_Decision</to>
 				</connector>
@@ -1453,10 +1408,6 @@
 					<from>Target_Supply_Line_Factor</from>
 					<to>Target_Supply_Line</to>
 				</connector>
-				<connector uid="102" angle="174.289">
-					<from>Weighting_on_Supply_Line</from>
-					<to>Sophisticated_Order_Decision</to>
-				</connector>
 				<connector uid="103" angle="122.905">
 					<from>
 						<alias uid="104"/>
@@ -1472,10 +1423,6 @@
 				<connector uid="107" angle="32.0054">
 					<from>Backorder</from>
 					<to>Surplus</to>
-				</connector>
-				<connector uid="108" angle="302.005">
-					<from>Naive_Order_Decision</from>
-					<to>Order_Decision</to>
 				</connector>
 				<connector uid="109" angle="112.38">
 					<from>Inventory</from>
@@ -1507,33 +1454,27 @@
 					</from>
 					<to>Making_Orders</to>
 				</connector>
-				<connector uid="118" angle="135">
+				<connector uid="118" angle="61.0736">
 					<from>Stock_Adjustment_Time</from>
 					<to>Sophisticated_Order_Decision</to>
 				</connector>
-				<connector uid="119" angle="293.199">
+				<connector uid="119" angle="105.584">
 					<from>Weight_on_Backorder</from>
 					<to>Naive_Order_Decision</to>
 				</connector>
-				<connector uid="120" angle="357.397">
+				<connector uid="120" angle="354.148">
 					<from>
 						<alias uid="121"/>
 					</from>
 					<to>Sophisticated_Order_Decision</to>
 				</connector>
-				<connector uid="122" angle="186.34">
+				<connector uid="122" angle="137.842">
 					<from>
 						<alias uid="123"/>
 					</from>
 					<to>Target_Supply_Line</to>
 				</connector>
-				<connector uid="124" angle="319.399">
-					<from>
-						<alias uid="125"/>
-					</from>
-					<to>Target_Total_Stock</to>
-				</connector>
-				<connector uid="126" angle="296.565">
+				<connector uid="126" angle="90">
 					<from>
 						<alias uid="127"/>
 					</from>
@@ -1551,7 +1492,7 @@
 					<from>Converter_3</from>
 					<to>Incoming_Delivery</to>
 				</connector>
-				<connector uid="131" angle="296.565">
+				<connector uid="131" angle="92.7666">
 					<from>Sophisticated_Order_Decision_ON</from>
 					<to>Order_Decision</to>
 				</connector>
@@ -1599,7 +1540,7 @@
 					</from>
 					<to>Naive_Order_Decision</to>
 				</connector>
-				<connector uid="144" angle="270">
+				<connector uid="144" angle="231.509">
 					<from>
 						<alias uid="145"/>
 					</from>
@@ -1612,10 +1553,6 @@
 				<connector uid="147" angle="324.462">
 					<from>Order_Delay</from>
 					<to>Sending_Orders</to>
-				</connector>
-				<connector uid="148" angle="240.945">
-					<from>Sophisticated_Order_Decision</from>
-					<to>Order_Decision</to>
 				</connector>
 				<connector uid="149" angle="0">
 					<from>Incoming_Delivery</from>
@@ -1639,15 +1576,11 @@
 					</from>
 					<to>Delivery_Policy</to>
 				</connector>
-				<connector uid="156" angle="234.462">
-					<from>Target_Supply_Line</from>
-					<to>Target_Total_Stock</to>
-				</connector>
 				<connector uid="157" angle="66.8014">
 					<from>Single_Player_Simple_Policy_ON</from>
 					<to>Actual_Order</to>
 				</connector>
-				<connector uid="158" angle="333.435">
+				<connector uid="158" angle="149.574">
 					<from>
 						<alias uid="159"/>
 					</from>
@@ -1657,14 +1590,14 @@
 					<from>Open_Orders</from>
 					<to>Total_Stock</to>
 				</connector>
-				<connector uid="161" angle="249.444">
+				<connector uid="161" angle="240.068">
 					<from>
 						<alias uid="162"/>
 					</from>
 					<to>Sophisticated_Order_Decision</to>
 				</connector>
 				<stock x="422" y="149" name="Inventory"/>
-				<flow x="313.5" y="146" name="Incoming Delivery Rate">
+				<flow label_side="right" x="313.5" y="146" name="Incoming Delivery Rate">
 					<pts>
 						<pt x="239.5" y="146"/>
 						<pt x="399.5" y="146"/>
@@ -1711,7 +1644,7 @@
 				</flow>
 				<aux color="blue" font_style="italic" font_weight="bold" x="1375" y="665" name="Order Delay"/>
 				<aux x="1432" y="858" name="Order from Order Line"/>
-				<aux x="1340" y="339" name="Sophisticated Order Decision"/>
+				<aux x="2117" y="248" name="Sophisticated Order Decision"/>
 				<stock x="217" y="142" name="Open Orders"/>
 				<flow x="137.75" y="144" name="Order Rate">
 					<pts>
@@ -1720,50 +1653,62 @@
 					</pts>
 				</flow>
 				<aux x="361" y="25" name="Total Stock"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="1459" y="457" name="Weighting on Supply Line"/>
+				<aux color="blue" font_style="italic" font_weight="bold" x="2236" y="366" name="Weighting on Supply Line"/>
 				<aux x="1400" y="55" name="Target Supply Line"/>
 				<aux x="447" y="502" name="Expected Order"/>
-				<aux x="1333" y="139" name="Target Total Stock"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="1427" y="358" name="Stock Adjustment Time"/>
-				<aux x="881" y="367" name="Naive Order Decision"/>
-				<aux x="1063" y="497" name="Order Decision"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="1037" y="401" name="Sophisticated Order Decision ON"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="988" y="155" name="Converter 6"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="875" y="184" name="Weight on Backorder"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="833" y="457" name="Weight on Inventory"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="1479" y="135" name="Target Supply Line Factor"/>
-				<aux color="blue" font_style="italic" font_weight="bold" x="1146" y="657" name="Multiplayer Mode ON"/>
-				<alias color="blue" font_style="italic" font_weight="bold" uid="125" x="1251" y="61" width="18" height="18">
-					<of>Converter_6</of>
-				</alias>
-				<alias font_style="italic" uid="121" x="1074.5" y="305.5" width="45" height="35">
+				<aux color="blue" font_style="italic" font_weight="bold" x="1999.88" y="352.875" width="20" height="20" name="Stock Adjustment Time"/>
+				<aux x="1967" y="885" name="Naive Order Decision"/>
+				<aux x="1187" y="322.5" name="Order Decision"/>
+				<aux color="blue" font_style="italic" font_weight="bold" x="1157.13" y="451.857" name="Sophisticated Order Decision ON"/>
+				<aux color="blue" font_style="italic" font_weight="bold" x="1783.38" y="978" name="Converter 6"/>
+				<aux color="blue" font_style="italic" font_weight="bold" x="2052.63" y="968.625" width="24.875" height="24.875" name="Weight on Backorder"/>
+				<aux color="blue" font_style="italic" font_weight="bold" x="1919" y="975" name="Weight on Inventory"/>
+				<aux color="blue" font_style="italic" font_weight="bold" x="1339" y="128" name="Target Supply Line Factor"/>
+				<aux color="blue" font_style="italic" font_weight="bold" x="1081" y="672" name="Multiplayer Mode ON"/>
+				<connector uid="102" angle="107.241">
+					<from>Weighting_on_Supply_Line</from>
+					<to>Sophisticated_Order_Decision</to>
+				</connector>
+				<connector uid="163" angle="86.1494">
+					<from>
+						<alias uid="164"/>
+					</from>
+					<to>Order_Decision</to>
+				</connector>
+				<connector uid="165" angle="84.4661">
+					<from>
+						<alias uid="166"/>
+					</from>
+					<to>Order_Decision</to>
+				</connector>
+				<alias font_style="italic" uid="121" x="1914" y="212" width="45" height="35">
 					<of>Inventory</of>
 				</alias>
-				<alias color="blue" font_style="italic" font_weight="bold" uid="127" x="1274" y="216" width="18" height="18">
+				<alias color="blue" font_style="italic" font_weight="bold" uid="127" x="2108" y="343.125" width="18" height="18">
 					<of>Converter_6</of>
 				</alias>
 				<alias font_style="italic" uid="153" x="460" y="749" width="18" height="18">
 					<of>Incoming_Delivery_Rate</of>
 				</alias>
-				<alias font_style="italic" uid="106" x="795.5" y="213.5" width="45" height="35">
+				<alias font_style="italic" uid="106" x="1881.5" y="731.5" width="45" height="35">
 					<of>Inventory</of>
 				</alias>
 				<alias font_style="italic" uid="100" x="890" y="829" width="18" height="18">
 					<of>Order_from_Order_Line</of>
 				</alias>
-				<alias font_style="italic" uid="143" x="821" y="302" width="18" height="18">
+				<alias font_style="italic" uid="143" x="1816.38" y="809.375" width="18" height="18">
 					<of>Expected_Order</of>
 				</alias>
-				<alias font_style="italic" uid="145" x="962" y="242" width="18" height="18">
+				<alias font_style="italic" uid="145" x="2136.75" y="760.625" width="18" height="18">
 					<of>Backorder</of>
 				</alias>
-				<alias font_style="italic" uid="113" x="1135.5" y="269.5" width="45" height="35">
+				<alias font_style="italic" uid="113" x="1986.25" y="154.125" width="45" height="35">
 					<of>Open_Orders</of>
 				</alias>
 				<alias font_style="italic" uid="151" x="291" y="752" width="18" height="18">
 					<of>Backorder</of>
 				</alias>
-				<alias font_style="italic" uid="159" x="1227" y="344" width="18" height="18">
+				<alias font_style="italic" uid="159" x="2291.63" y="209.625" width="20" height="20">
 					<of>Expected_Order</of>
 				</alias>
 				<alias font_style="italic" uid="140" x="102" y="206" width="18" height="18">
@@ -1775,10 +1720,10 @@
 				<alias font_style="italic" uid="117" x="1219" y="853" width="18" height="18">
 					<of>Order_Decision</of>
 				</alias>
-				<alias font_style="italic" uid="162" x="1388" y="231" width="18" height="18">
+				<alias font_style="italic" uid="162" x="2165" y="140" width="18" height="18">
 					<of>Target_Supply_Line</of>
 				</alias>
-				<alias font_style="italic" uid="123" x="1484" y="38" width="18" height="18">
+				<alias font_style="italic" uid="123" x="1465" y="113" width="18" height="18">
 					<of>Expected_Order</of>
 				</alias>
 				<alias font_style="italic" uid="104" x="205.5" y="754.5" width="45" height="35">
@@ -1786,6 +1731,12 @@
 				</alias>
 				<alias font_style="italic" uid="155" x="364" y="755" width="18" height="18">
 					<of>Incoming_Order</of>
+				</alias>
+				<alias font_style="italic" uid="164" x="1039" y="442.857" width="18" height="18">
+					<of>Naive_Order_Decision</of>
+				</alias>
+				<alias font_style="italic" uid="166" x="1272.5" y="430.696" width="18" height="18">
+					<of>Sophisticated_Order_Decision</of>
 				</alias>
 			</view>
 			<view page_height="528" page_width="788" home_view="true" type="interface" isee:show_pages="false">
@@ -1870,7 +1821,7 @@
 			<aux name="Target Inventory" access="input"/>
 		</variables>
 		<views>
-			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="872.667" zoom="150" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="3" isee:page_rows="3" isee:scroll_x="918.571" zoom="140" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_family="Geneva" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -1939,7 +1890,7 @@
 					<from>distributor_backorder_cost</from>
 					<to>distributor_cost</to>
 				</connector>
-				<connector uid="172" angle="310.601">
+				<connector uid="172" angle="298.179">
 					<from>cost_per_item_in_backorder</from>
 					<to>brewery_backorder_cost</to>
 				</connector>
@@ -2107,13 +2058,6 @@
 					</pts>
 				</flow>
 				<aux color="blue" font_style="italic" font_weight="bold" x="594" y="166" name="Target Inventory"/>
-				<stacked_container uid="210" x="913" y="1456.33">
-					<graph width="350" height="250" type="time_series" isee:points_only="false" show_grid="false" include_units_in_legend="false" plot_numbers="false" isee:label_pie_slices="false" num_x_grid_lines="0" num_y_grid_lines="0" num_x_labels="5" num_y_labels="3" isee:fill_intensity="0.1" left_axis_multi_scale="false" left_axis_auto_scale="true" right_axis_multi_scale="false" right_axis_auto_scale="true">
-						<plot color="blue" isee:keep_zero_visible="false" pen_width="1" index="0" show_y_axis="true">
-							<entity name="Supply_Chain_Cost_Acc"/>
-						</plot>
-					</graph>
-				</stacked_container>
 				<alias font_style="italic" uid="184" x="333" y="619" width="18" height="18">
 					<of>cost_per_item_in_inventory</of>
 				</alias>
@@ -2216,7 +2160,7 @@
 			</aux>
 		</variables>
 		<views>
-			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:scroll_y="9.375" zoom="160" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_family="Geneva" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2406,7 +2350,7 @@
 			<aux name="Multiplayer Mode ON" access="input"/>
 		</variables>
 		<views>
-			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" isee:scroll_y="35" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="483" isee:scroll_y="244" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_family="Geneva" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -2625,7 +2569,7 @@
 					<from>Target_Supply_Line</from>
 					<to>Target_Total_Stock</to>
 				</connector>
-				<connector uid="264" angle="77.4712">
+				<connector uid="264" angle="73.3856">
 					<from>Dynamic_Customer_Order</from>
 					<to>Customer_Order</to>
 				</connector>
@@ -2979,7 +2923,7 @@
 			<aux name="Multiplayer Mode ON" access="input"/>
 		</variables>
 		<views>
-			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="64" isee:scroll_y="5" isee:popup_graphs_are_comparative="true" type="stock_flow">
+			<view isee:show_pages="true" background="white" page_width="818" page_height="571" isee:page_cols="2" isee:page_rows="2" isee:scroll_x="64" isee:scroll_y="5" isee:popup_graphs_are_comparative="true" isee:enable_non_negative_highlights="false" type="stock_flow">
 				<style color="black" background="white" font_style="normal" font_weight="normal" text_decoration="none" text_align="center" vertical_text_align="center" font_color="black" font_family="Arial" font_size="10pt" padding="2" border_color="black" border_width="thin" border_style="none">
 					<stock color="blue" background="white" font_color="blue" font_family="Geneva" font_size="9pt" label_side="top">
 						<shape type="rectangle" width="45" height="35"/>
@@ -3386,10 +3330,10 @@
 		</views>
 	</model>
 	<isee:controls>
-		<isee:control priority="interactive" name="Policy_Settings.Stock_Adjustment_Time" value="8"/>
-		<isee:control priority="interactive" name="Policy_Settings.Weighting_Open_Orders" value="1"/>
-		<isee:control priority="interactive" name="Policy_Settings.Weighting_Backorder" value="0"/>
 		<isee:control priority="interactive" name="Policy_Settings.Sophisticated_Order_Decision_ON" value="1"/>
+		<isee:control priority="interactive" name="Policy_Settings.Stock_Adjustment_Time" value="8"/>
+		<isee:control priority="interactive" name="Policy_Settings.Weighting_Backorder" value="0"/>
+		<isee:control priority="interactive" name="Policy_Settings.Weighting_Open_Orders" value="1"/>
 	</isee:controls>
 </xmile>
 

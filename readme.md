@@ -5,42 +5,46 @@ The Beer Game was developed in the 1960s at MIT to illustrate how difficult it i
 
 This repository contains computational notebooks,  simulation models and AI training algorithms that explore the game  in depth.
 
-Please read the companion blog posts on our [website](https://www.transentis.com/understanding-the-beer-game/). You can also find a companion slidedeck on [slides.com](https://transentis.slides.com/ograsl/beer_game)
+Please read the companion blog posts on our [website](https://www.transentis.com/case-study-play-the-beer-game/en/).
 
 Have a go at playing the Beer Game (on your own or – much more fun – in a group) before you read the notebooks:
 
-* A single player version of the Beer Game can be found on our [website](https://www.transentis.com/current-topics/business-games/beer-game/). 
-* We also have a multiplayer version of the Beer Game set up as a [docker container](https://hub.docker.com/r/transentis/beergame).
+* A single player version of the Beer Game can be found on our [website](https://www.transentis.com/case-study-play-the-beer-game/en/). 
 
-The notebooks use the [BPTK-Py package](https://bptk.transentis-labs.com/en/latest/index.html), which provides System Dynamics and Agent-based modeling in Python.
+The notebooks use the [BPTK-Py package](https://www.transentis.com/business-prototyping-toolkit/en/), which provides System Dynamics and Agent-based modeling in Python.
 
 ## Repository Contents
 
 ### Notebooks
 
-* __Understanding the Beergame.__ This is the best place to get started - play the Beer Game in single player mode and learn about the dynamics governing the game. This version uses a System Dynamics implementation of the Beer Game.
-* __An Agent-based Approach To Modeling the Beer Game.__ An agent-based simulation of the beergame that can be used to test policies. It is also used as the basis for the reinforcement learning apporach described in the following notebook.
-* __Training AI to play the Beer Game – A Reinforcement Learning Approach.__ This notebook introduces the concept of reinforcement learning and then applies it to training intelligent agents to play the Beer Game.
+This repository contains a number of Jupyter notebooks. The key ones are:
+
+* __[Understanding the Beergame](understanding_the_beergame.ipynb).__ This is the best place to get started - play the Beer Game in single player mode and learn about the dynamics governing the game. This version uses a SD DSL implementation of the Beer Game.
+* __[An Agent-based Approach To Modeling the Beer Game](beergame_abm.ipynb).__ An agent-based simulation of the beergame that can be used to test policies. It is also used as the basis for the reinforcement learning apporach described in the following notebook.
+* __[Training AI to play the Beer Game – A Reinforcement Learning Approach](training_ai_beergame.ipynb).__ This notebook introduces the concept of reinforcement learning and then applies it to training intelligent agents to play the Beer Game.
 
 ### Models
 
-This repository contains two simulation models of the Beer Game - one build using System Dynamics and one built using Agent-based modeling. Both models produce identical results.
+This repository contains three simulation models of the Beer Game:
 
-The SD version was built with Stella Architect, it can be found in the _simulation_models_ directory. This version of the simulation is used in the [Understanding the Beergame](understanding_the_beergame.ipynb) notebook.
+* One version of the Beergame model built in Python using the SD DSL provided by BPTK. This version is used in the [Understanding the Beergame](understanding_the_beergame.ipynb) notebook and is discussed in detail in the [A Stock and Flow Model For The Beer Distribution Game](beergame_sd_dsl.ipynb) notebook. The code for this version can be found in the _src/sd_dsl_ directory.
+* One version of the Beergame model built using Stella Architect and then utilizing the XMILE transpiler that is part of BPTK. The Stella model can be found in the _simulation_models_ directory. This version of the simulation is used in the [Understanding the Beergame (XMILE)](understanding_the_beergame_xmile.ipynb) notebook.
+* One built using the Agent-based modeling framework that is part of BPTK-Py. The ABM version can be found in the  _src/abm_ directory.  This version is is used in the [An Agent-based Approach To Modling the Beergame](beergame_abm.ipynb) and [Training AI to Play The Beer Game](training_ai_beergame.ipynb) notebooks.
 
-The ABM version can be found in the  _src_ directory.  This version is is used in the [An Agent-based Approach To Modling the Beergame](beergame_abm.ipynb) and [Training AI to Play The Beer Game](training_ai_beergame.ipynb) notebooks.
+All models produce identical results.
+
 
 ## Installation And Testing Instructions
 
-### Installing using Docker
+### Using Docker
 
 If you have Docker installed (e.g. Docker Desktop on MacOS or on Windows), follow these steps:
 
-* On the command line, move into a directory where you would like to store the Beergame repository.
-* Clone the BPTK-Py tutorial repository using git clone: `git clone https://github.com/transentis/beergame.git
-* Run `docker-compose up`
-* Point your browser at [http://localhost:8888](http://localhost:8888) – this will open JupyterLab showing the contents of your directory.
-
+1. Clone this repo in a directory of your choice: `git clone`
+2. Run ```docker-compose up```
+3. Point your browser at [http://localhost:8888](http://localhost:8888) – this will open JupyterLab showing a directory `work` in the file browser. This directory contains your working directory.
+4. Open the readme file ```work/readme.md``` from within JupyterLab.
+6. When you are finished, close your browser and call ```docker-compose down``` from within your directory. This will stop and remove the container.
 
 ### Installing using a Python virtual environment
 
@@ -61,3 +65,14 @@ Once you have installed, to make sure everything is working open the notebook [b
 ![Notebook Screenshot](beergame_screenshot.png)
 
 If you have any questions, let us know via email to [support@transentis.com](mailto://support@transentis.com).
+
+
+## Further Reading
+
+You can find extensive [documentation](https://bptk.transentis.com) online and advanced tutorials and examples on [GitHub](https://github.com/transentis/bptk_py_tutorial).
+
+You can also find more Jupyter notebooks and simulation models on GitHub:
+
+* [Introduction to BPTK](https://github.com/transentis/bptk_intro). Introductory notebooks and dashboards to get you started with BPTK.
+* [COVID Simulation](https://github.com/transentis/sim-covid-19). Jupyter notebooks and dashboards illustrating the SIR model.
+* [COVID Simulation Dashboard](https://github.com/transentis/sim-covid-dashboard). A web-based simulation dashboard for the COVID simulation built using our BPTK Widgets library for Javascript. View a [live version](http://www.covid-sim.com) of the dashboard online.

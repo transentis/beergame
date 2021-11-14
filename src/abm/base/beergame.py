@@ -1,4 +1,4 @@
-from BPTK_Py.abm import Model
+from BPTK_Py import Model
 from .brewery import Brewery
 from .distributor import Distributor
 from .wholesaler import Wholesaler

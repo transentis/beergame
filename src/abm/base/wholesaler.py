@@ -1,4 +1,4 @@
-from src.base.supplyChainAgent import SupplyChainAgent
+from .supplyChainAgent import SupplyChainAgent
 
 
 class Wholesaler(SupplyChainAgent):
