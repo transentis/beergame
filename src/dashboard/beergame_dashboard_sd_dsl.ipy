@@ -50,8 +50,8 @@ def update_graphs(ignore_backorders, include_supply_line, inventory_adjustment_t
     scenario= bptk.get_scenario("sd_dsl_beergame","interactive_scenario")
 
     scenario.constants["policy_settings.sophisticated_order_decision_on"] = 1 if ignore_backorders else 0
-    scenario.constants["policy_settings.weighting_open_orders"] = 1 if include_supply_line else 0
-    scenario.constants["policy_settings.stock_adjustment_time"]=inventory_adjustment_time
+    scenario.constants["policy_settings.include_supply_line_on"] = 1 if include_supply_line else 0
+    scenario.constants["policy_settings.inventory_adjustment_time"]=inventory_adjustment_time
    
 
 

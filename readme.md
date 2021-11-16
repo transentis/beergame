@@ -31,7 +31,7 @@ This repository contains three simulation models of the Beer Game:
 * One version of the Beergame model built using Stella Architect and then utilizing the XMILE transpiler that is part of BPTK. The Stella model can be found in the _simulation_models_ directory. This version of the simulation is used in the [Understanding the Beergame (XMILE)](understanding_the_beergame_xmile.ipynb) notebook.
 * One built using the Agent-based modeling framework that is part of BPTK-Py. The ABM version can be found in the  _src/abm_ directory.  This version is is used in the [An Agent-based Approach To Modling the Beergame](beergame_abm.ipynb) and [Training AI to Play The Beer Game](training_ai_beergame.ipynb) notebooks.
 
-All models produce identical results.
+Both SD models produce identical results.
 
 
 ## Installation And Testing Instructions

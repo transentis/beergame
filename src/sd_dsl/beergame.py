@@ -9,17 +9,16 @@ from .supplyChainModule import SupplyChainModule
 
 class Beergame(Model):
     def __init__(self):
-        super().__init__(starttime=1.0,stoptime=24.0, dt=1.0, name="Beeergame SD DSL")
-        policy_settings = PolicySettings(
-            model=self,
-            name="policy_settings"
-        )
+        super().__init__(starttime=1.0,stoptime=24.0, dt=1.0, name="Beergame SD DSL")
+        
+         
+        ####
+        # Step 1: create the modules
+        ####
+        
 
-        performance_controlling = PerformanceControlling(
-            model=self,
-            name="performance_controlling"
-        )
-
+        # the supply chain modules
+        
         consumer = Consumer(
             model=self,
             name="consumer")
@@ -40,7 +39,24 @@ class Beergame(Model):
         brewery = Brewery(
             model=self,
             name="brewery")
+        
+        # modules for settings and controlling
+        
+        policy_settings = PolicySettings(
+            model=self,
+            name="policy_settings"
+        )
 
+        performance_controlling = PerformanceControlling(
+            model=self,
+            name="performance_controlling"
+        )
+
+        
+        ####
+        # Step 2: initialize the modules
+        ###
+        
         consumer.initialize(policy_settings=policy_settings)
         retailer.initialize(supplier=wholesaler,customer=consumer,policy_settings=policy_settings)
         wholesaler.initialize(supplier=distributor, customer=retailer, policy_settings=policy_settings)

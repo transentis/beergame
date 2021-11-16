@@ -4,93 +4,92 @@ from .module import Module
 class SupplyChainModule(Module):
     def __init__(self, model, name):
         super().__init__(model, name)
-        # Exports
+        
+        # Exports for supply chain
         self.sending_orders = self.model.flow(self.module_element("sending_orders"))
         self.outgoing_deliveries = self.model.flow(self.module_element("outgoing_deliveries"))
+        
+        # Exports for performance controlling
+        
+        self.inventory = self.model.stock(self.module_element("inventory"))
+        self.backorder = self.model.converter(self.module_element("backorder"))
+        
+        # Exports for subclasses
+        self.incoming_delivery_rate = self.model.converter(self.module_element("incoming_delivery_rate"))
 
     def initialize(self, supplier, customer, policy_settings):
         # Stocks
 
-        self.open_orders = self.model.stock(self.module_element("open_orders"))
-        self.inventory = self.model.stock(self.module_element("inventory"))
-        self.deliveries_made = self.model.stock(self.module_element("deliveries_made"))
-        self.orders_received = self.model.stock(self.module_element("orders_received"))
-        self.order_line = self.model.stock(self.module_element("order_line"))
+        open_orders = self.model.stock(self.module_element("open_orders"))
+        deliveries_made = self.model.stock(self.module_element("deliveries_made"))
+        orders_received = self.model.stock(self.module_element("orders_received"))
 
         # Flows
 
-        self.incoming_orders = self.model.flow(self.module_element("incoming_orders"))
-        self.outgoing_orders = self.model.flow(self.module_element("outgoing_orders"))
-        self.incoming_deliveries = self.model.flow(self.module_element("incoming_deliveries"))
-        self.making_orders = self.model.flow(self.module_element("making_orders"))
+        incoming_orders = self.model.flow(self.module_element("incoming_orders"))
+        outgoing_orders = self.model.flow(self.module_element("outgoing_orders"))
+        incoming_deliveries = self.model.flow(self.module_element("incoming_deliveries"))
 
         # Converters
 
-        self.incoming_delivery_rate = self.model.converter(self.module_element("incoming_delivery_rate"))
-        self.outgoing_delivery_rate = self.model.converter(self.module_element("outgoing_delivery_rate"))
-        self.incoming_order_rate = self.model.converter(self.module_element("incoming_order_rate"))
-        self.total_stock = self.model.converter(self.module_element("total_stock"))
-        self.surplus = self.model.converter(self.module_element("surplus"))
-        self.backorder = self.model.converter(self.module_element("backorder"))
-        self.order_decision = self.model.converter(self.module_element("order_decision"))
-        self.naive_order_decision = self.model.converter(self.module_element("naive_order_decision"))
-        self.sophisticated_order_decision = self.model.converter(self.module_element("sophisticated_order_decision"))
-        self.target_supply_line = self.model.converter(self.module_element("target_supply_line"))
+        outgoing_delivery_rate = self.model.converter(self.module_element("outgoing_delivery_rate"))
+        incoming_order_rate = self.model.converter(self.module_element("incoming_order_rate"))
+        total_stock = self.model.converter(self.module_element("total_stock"))
+        surplus = self.model.converter(self.module_element("surplus"))
+        order_decision = self.model.converter(self.module_element("order_decision"))
+        naive_order_decision = self.model.converter(self.module_element("naive_order_decision"))
+        sophisticated_order_decision = self.model.converter(self.module_element("sophisticated_order_decision"))
+        target_supply_line = self.model.converter(self.module_element("target_supply_line"))
 
         # Initial Values
 
-        self.open_orders.initial_value = 200.0
+        open_orders.initial_value = 200.0
         self.inventory.initial_value = 400.0
-        self.deliveries_made.initial_value = 0.0
-        self.incoming_orders.initial_value = 0.0
-        self.order_line.initial_value = 100.0
-
+        deliveries_made.initial_value = 0.0
+        incoming_orders.initial_value = 0.0
 
         # Equations
 
         ## Inflows and Outflows
 
-        self.open_orders.equation = self.outgoing_orders-self.incoming_deliveries
-        self.inventory.equation = self.incoming_deliveries-self.outgoing_deliveries
-        self.deliveries_made.equation = self.outgoing_deliveries
-        self.orders_received.equation = self.incoming_orders
-        self.order_line.equation = self.making_orders-self.sending_orders
+        open_orders.equation = outgoing_orders-incoming_deliveries
+        self.inventory.equation = incoming_deliveries-self.outgoing_deliveries
+        deliveries_made.equation = self.outgoing_deliveries
+        orders_received.equation = incoming_orders
 
         ## Flows and Rates
-        self.total_stock.equation = self.open_orders+self.inventory
-        self.surplus.equation = self.inventory - self.backorder
-        self.backorder.equation = sd.max(self.orders_received-self.deliveries_made,0)
+        surplus.equation = self.inventory - self.backorder
+        self.backorder.equation = sd.max(orders_received-deliveries_made,0)
 
-        self.incoming_orders.equation = self.incoming_order_rate
-        self.incoming_order_rate.equation = customer.sending_orders
+        incoming_orders.equation = incoming_order_rate
+        incoming_order_rate.equation = customer.sending_orders
 
-        self.outgoing_orders.equation = self.making_orders
+        outgoing_orders.equation = order_decision
 
-        self.incoming_deliveries.equation = self.incoming_delivery_rate
+        incoming_deliveries.equation = self.incoming_delivery_rate
 
         self.incoming_delivery_rate.equation = sd.delay(self.model,supplier.outgoing_deliveries,policy_settings.delivery_delay,100.0) if supplier is not None else None
 
-        self.outgoing_deliveries.equation = sd.min(self.inventory+self.incoming_deliveries,self.outgoing_delivery_rate)
-        self.outgoing_delivery_rate.equation = sd.min(self.backorder+self.incoming_orders,self.inventory+self.incoming_deliveries)
+        self.outgoing_deliveries.equation = outgoing_delivery_rate
+        outgoing_delivery_rate.equation = sd.min(self.backorder+incoming_orders,self.inventory+incoming_deliveries)
 
-        self.making_orders.equation = self.order_decision
-        self.sending_orders.equation = sd.delay(self.model,self.making_orders,policy_settings.order_delay, 100.0)
+        self.sending_orders.equation = sd.delay(self.model,order_decision,policy_settings.order_delay, 100.0)
 
         ## Decision Policies
 
-        self.target_supply_line.equation = self.incoming_order_rate*policy_settings.target_supply_line_factor
+        target_supply_line.equation = incoming_order_rate*(policy_settings.order_delay+policy_settings.delivery_delay)
 
         ### Order Decision
 
-        self.order_decision.equation = sd.If(policy_settings.sophisticated_order_decision_on == 1.0, self.sophisticated_order_decision,self.naive_order_decision)
+        order_decision.equation = sd.If(policy_settings.sophisticated_order_decision_on == 1.0, sophisticated_order_decision,naive_order_decision)
 
         ### Naive Order Decision
 
-        self.naive_order_decision.equation = policy_settings.target_inventory - self.inventory + self.backorder + self.incoming_order_rate
+        naive_order_decision.equation = sd.max(policy_settings.target_inventory - self.inventory + self.backorder + incoming_order_rate,0.0)
 
         ### Sophisticated Order Decision
 
-        self.sophisticated_order_decision.equation = 1.0*sd.round((sd.max(self.incoming_order_rate+(policy_settings.target_inventory-self.inventory + policy_settings.weighting_open_orders*(self.target_supply_line-self.open_orders))/policy_settings.stock_adjustment_time,0.0)),0)
+        sophisticated_order_decision.equation = 1.0*sd.round((sd.max(incoming_order_rate+(policy_settings.target_inventory-self.inventory + policy_settings.include_supply_line_on*(target_supply_line-open_orders))/policy_settings.inventory_adjustment_time,0.0)),0)
 
 
 

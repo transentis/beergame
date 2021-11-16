@@ -10,50 +10,50 @@ class PerformanceControlling(Module):
     def initialize(self,brewery, distributor, wholesaler, retailer, policy_settings):
         # Stocks
 
-        self.total_retailer_cost = self.model.stock(self.module_element("total_retailer_cost"))
-        self.total_supply_chain_cost = self.model.stock(self.module_element("total_supply_chain_cost"))
+        total_retailer_cost = self.model.stock(self.module_element("total_retailer_cost"))
+        total_supply_chain_cost = self.model.stock(self.module_element("total_supply_chain_cost"))
 
         # Flows
 
-        self.retailer_cost_in = self.model.flow(self.module_element("retailer_cost_in"))
-        self.supply_chain_cost_in = self.model.flow(self.module_element("supply_chain_cost_in"))
+        retailer_cost_in = self.model.flow(self.module_element("retailer_cost_in"))
+        supply_chain_cost_in = self.model.flow(self.module_element("supply_chain_cost_in"))
 
         # Converters
 
         ## Brewery
 
-        self.brewery_cost = self.model.converter(self.module_element("brewery_cost"))
-        self.brewery_backorder_cost = self.model.converter(self.module_element("brewery_backorder_cost"))
-        self.brewery_inventory_cost = self.model.converter(self.module_element("brewery_inventory_cost"))
+        brewery_cost = self.model.converter(self.module_element("brewery_cost"))
+        brewery_backorder_cost = self.model.converter(self.module_element("brewery_backorder_cost"))
+        brewery_inventory_cost = self.model.converter(self.module_element("brewery_inventory_cost"))
 
         ## Distributor
 
-        self.distributor_cost = self.model.converter(self.module_element("distributor_cost"))
-        self.distributor_backorder_cost = self.model.converter(self.module_element("distributor_backorder_cost"))
-        self.distributor_inventory_cost = self.model.converter(self.module_element("distributor_inventory_cost"))
+        distributor_cost = self.model.converter(self.module_element("distributor_cost"))
+        distributor_backorder_cost = self.model.converter(self.module_element("distributor_backorder_cost"))
+        distributor_inventory_cost = self.model.converter(self.module_element("distributor_inventory_cost"))
 
         ## Wholesaler
 
-        self.wholesaler_cost = self.model.converter(self.module_element("wholesaler_cost"))
-        self.wholesaler_backorder_cost = self.model.converter(self.module_element("wholesaler_backorder_cost"))
-        self.wholesaler_inventory_cost = self.model.converter(self.module_element("wholesaler_inventory_cost"))
+        wholesaler_cost = self.model.converter(self.module_element("wholesaler_cost"))
+        wholesaler_backorder_cost = self.model.converter(self.module_element("wholesaler_backorder_cost"))
+        wholesaler_inventory_cost = self.model.converter(self.module_element("wholesaler_inventory_cost"))
 
         ## Retailer
 
-        self.retailer_cost = self.model.converter(self.module_element("retailer_cost"))
-        self.retailer_backorder_cost = self.model.converter(self.module_element("retailer_backorder_cost"))
-        self.retailer_inventory_cost = self.model.converter(self.module_element("retailer_inventory_cost"))
+        retailer_cost = self.model.converter(self.module_element("retailer_cost"))
+        retailer_backorder_cost = self.model.converter(self.module_element("retailer_backorder_cost"))
+        retailer_inventory_cost = self.model.converter(self.module_element("retailer_inventory_cost"))
 
         ## Supply Chain
 
-        self.supply_chain_cost = self.model.converter(self.module_element("supply_chain_cost"))
+        supply_chain_cost = self.model.converter(self.module_element("supply_chain_cost"))
 
         # Constants
 
         ## Supply Chain
 
-        self.cost_per_item_in_backorder = self.model.constant(self.module_element("cost_per_item_in_backorder"))
-        self.cost_per_item_in_inventory = self.model.constant(self.module_element("cost_per_item_in_inventory"))
+        cost_per_item_in_backorder = self.model.constant(self.module_element("cost_per_item_in_backorder"))
+        cost_per_item_in_inventory = self.model.constant(self.module_element("cost_per_item_in_inventory"))
 
         # Equations
 
@@ -61,36 +61,36 @@ class PerformanceControlling(Module):
 
         ## Supply Chain
 
-        self.cost_per_item_in_inventory.equation = 0.5
-        self.cost_per_item_in_backorder.equation = 1.0
+        cost_per_item_in_inventory.equation = 0.5
+        cost_per_item_in_backorder.equation = 1.0
 
-        self.supply_chain_cost.equation = self.brewery_cost + self.retailer_cost + self.distributor_cost + self.wholesaler_cost
-        self.supply_chain_cost_in.equation = self.supply_chain_cost
+        supply_chain_cost.equation = brewery_cost + retailer_cost + distributor_cost + wholesaler_cost
+        supply_chain_cost_in.equation = supply_chain_cost
 
-        self.total_supply_chain_cost.equation = self.supply_chain_cost_in
+        total_supply_chain_cost.equation = supply_chain_cost_in
         ## Brewery*
 
-        self.brewery_cost.equation = self.brewery_backorder_cost+self.brewery_inventory_cost
-        self.brewery_backorder_cost.equation = self.cost_per_item_in_backorder*brewery.backorder
-        self.brewery_inventory_cost.equation = self.cost_per_item_in_inventory*sd.max(brewery.inventory,policy_settings.target_inventory)
+        brewery_cost.equation = brewery_backorder_cost+brewery_inventory_cost
+        brewery_backorder_cost.equation = cost_per_item_in_backorder*brewery.backorder
+        brewery_inventory_cost.equation = cost_per_item_in_inventory*sd.max(brewery.inventory,policy_settings.target_inventory)
 
         ## Distributor
 
-        self.distributor_cost.equation = self.distributor_backorder_cost+self.distributor_inventory_cost
-        self.distributor_backorder_cost.equation = self.cost_per_item_in_backorder*distributor.backorder
-        self.distributor_inventory_cost.equation = self.cost_per_item_in_inventory*sd.max(distributor.inventory,policy_settings.target_inventory)
+        distributor_cost.equation = distributor_backorder_cost+distributor_inventory_cost
+        distributor_backorder_cost.equation = cost_per_item_in_backorder*distributor.backorder
+        distributor_inventory_cost.equation = cost_per_item_in_inventory*sd.max(distributor.inventory,policy_settings.target_inventory)
 
         ## Wholesaler
 
-        self.wholesaler_cost.equation = self.wholesaler_backorder_cost+self.wholesaler_inventory_cost
-        self.wholesaler_backorder_cost.equation = self.cost_per_item_in_backorder*wholesaler.backorder
-        self.wholesaler_inventory_cost.equation=self.cost_per_item_in_inventory*sd.max(wholesaler.inventory,policy_settings.target_inventory)
+        wholesaler_cost.equation = wholesaler_backorder_cost+wholesaler_inventory_cost
+        wholesaler_backorder_cost.equation = cost_per_item_in_backorder*wholesaler.backorder
+        wholesaler_inventory_cost.equation = cost_per_item_in_inventory*sd.max(wholesaler.inventory,policy_settings.target_inventory)
 
         ## Retailer
 
-        self.retailer_cost.equation = self.retailer_backorder_cost+self.retailer_inventory_cost
-        self.retailer_backorder_cost.equation = self.cost_per_item_in_backorder*retailer.backorder
-        self.retailer_inventory_cost.equation=self.cost_per_item_in_inventory*sd.max(retailer.inventory,policy_settings.target_inventory)
+        retailer_cost.equation = retailer_backorder_cost+retailer_inventory_cost
+        retailer_backorder_cost.equation = cost_per_item_in_backorder*retailer.backorder
+        retailer_inventory_cost.equation = cost_per_item_in_inventory*sd.max(retailer.inventory,policy_settings.target_inventory)
 
-        self.retailer_cost_in.equation = self.retailer_cost
-        self.total_retailer_cost.equation = self.retailer_cost_in
+        retailer_cost_in.equation = retailer_cost
+        total_retailer_cost.equation = retailer_cost_in
