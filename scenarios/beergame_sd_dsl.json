@@ -3,7 +3,7 @@
     "type":"sd",
     "model": "src.sd_dsl.beergame.Beergame",
     "base_constants":{
-            "policy_settings.steady_state_on":0.0,
+            "policy_settings.steady_state_on":1.0,
             "policy_settings.sophisticated_order_decision_on":0.0,
             "policy_settings.include_supply_line_on":0.0,
             "policy_settings.inventory_adjustment_time":1.0

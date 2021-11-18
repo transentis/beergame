@@ -72,7 +72,7 @@ class SupplyChainAgent(Agent):
         self.incoming_deliveries += self.incoming_delivery
         self.outgoing_orders += self.outgoing_order
         # update the KPIs
-        self.outstanding_orders = self.outgoing_orders-self.incoming_deliveries
+        self.outstanding_orders += self.outgoing_order-self.incoming_delivery
         self.backorder = self.incoming_orders - self.outgoing_deliveries
         self.inventory += self.incoming_delivery-self.outgoing_delivery
         self.surplus = self.inventory - self.backorder
