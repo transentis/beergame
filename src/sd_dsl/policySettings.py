@@ -1,4 +1,4 @@
-from .module import Module
+from BPTK_Py import Module
 
 
 class PolicySettings(Module):
@@ -7,20 +7,20 @@ class PolicySettings(Module):
         super().__init__(model, name)
         # constants
 
-        self.target_inventory = self.model.constant(self.module_element("target_inventory"))
-        self.target_retailer_cost = self.model.constant(self.module_element("target_retailer_cost"))
-        self.target_supply_chain_cost = self.model.constant(self.module_element("target_supply_chain_cost"))
-        self.target_surplus = self.model.constant(self.module_element("target_surplus"))
+        self.target_inventory = self.constant("target_inventory")
+        self.target_retailer_cost = self.constant("target_retailer_cost")
+        self.target_supply_chain_cost = self.constant("target_supply_chain_cost")
+        self.target_surplus = self.constant("target_surplus")
 
-        self.inventory_adjustment_time = self.model.constant(self.module_element("inventory_adjustment_time"))
+        self.inventory_adjustment_time = self.constant("inventory_adjustment_time")
 
-        self.include_supply_line_on = self.model.constant(self.module_element("include_supply_line_on"))
-        self.steady_state_on = self.model.constant(self.module_element("steady_state_on"))
-        self.sophisticated_order_decision_on = self.model.constant(self.module_element("sophisticated_order_decision_on"))
+        self.include_supply_line_on = self.constant("include_supply_line_on")
+        self.steady_state_on = self.constant("steady_state_on")
+        self.sophisticated_order_decision_on = self.constant("sophisticated_order_decision_on")
 
-        self.order_delay = self.model.constant(self.module_element("order_delay"))
-        self.delivery_delay = self.model.constant(self.module_element("delivery_delay"))
-        self.rise_in_consumer_order = self.model.constant(self.module_element("rise_in_consumer_order"))
+        self.order_delay = self.constant("order_delay")
+        self.delivery_delay = self.constant("delivery_delay")
+        self.rise_in_consumer_order = self.constant("rise_in_consumer_order")
 
         # Equations
 

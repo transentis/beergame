@@ -1,5 +1,5 @@
 from BPTK_Py import sd_functions as sd
-from .module import Module
+from BPTK_Py import Module
 
 class Consumer(Module):
 
@@ -7,7 +7,7 @@ class Consumer(Module):
         super().__init__(model,name)
 
         # Exports
-        self.sending_orders = self.model.converter(self.module_element("sending_orders"))
+        self.sending_orders = self.converter("sending_orders")
 
     def initialize(self, policy_settings):
         # Equations

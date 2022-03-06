@@ -1,45 +1,45 @@
 from BPTK_Py import sd_functions as sd
-from .module import Module
+from BPTK_Py import Module
 
 class SupplyChainModule(Module):
     def __init__(self, model, name):
         super().__init__(model, name)
         
         # Exports for supply chain
-        self.sending_orders = self.model.flow(self.module_element("sending_orders"))
-        self.outgoing_deliveries = self.model.flow(self.module_element("outgoing_deliveries"))
+        self.sending_orders = self.flow("sending_orders")
+        self.outgoing_deliveries = self.flow("outgoing_deliveries")
         
         # Exports for performance controlling
         
-        self.inventory = self.model.stock(self.module_element("inventory"))
-        self.backorder = self.model.converter(self.module_element("backorder"))
+        self.inventory = self.stock("inventory")
+        self.backorder = self.converter("backorder")
         
         # Exports for subclasses
-        self.incoming_delivery_rate = self.model.converter(self.module_element("incoming_delivery_rate"))
+        self.incoming_delivery_rate = self.converter("incoming_delivery_rate")
 
     def initialize(self, supplier, customer, policy_settings):
         # Stocks
 
-        open_orders = self.model.stock(self.module_element("open_orders"))
-        deliveries_made = self.model.stock(self.module_element("deliveries_made"))
-        orders_received = self.model.stock(self.module_element("orders_received"))
+        open_orders = self.stock("open_orders")
+        deliveries_made = self.stock("deliveries_made")
+        orders_received = self.stock("orders_received")
 
         # Flows
 
-        incoming_orders = self.model.flow(self.module_element("incoming_orders"))
-        outgoing_orders = self.model.flow(self.module_element("outgoing_orders"))
-        incoming_deliveries = self.model.flow(self.module_element("incoming_deliveries"))
+        incoming_orders = self.flow("incoming_orders")
+        outgoing_orders = self.flow("outgoing_orders")
+        incoming_deliveries = self.flow("incoming_deliveries")
 
         # Converters
 
-        outgoing_delivery_rate = self.model.converter(self.module_element("outgoing_delivery_rate"))
-        incoming_order_rate = self.model.converter(self.module_element("incoming_order_rate"))
-        total_stock = self.model.converter(self.module_element("total_stock"))
-        surplus = self.model.converter(self.module_element("surplus"))
-        order_decision = self.model.converter(self.module_element("order_decision"))
-        naive_order_decision = self.model.converter(self.module_element("naive_order_decision"))
-        sophisticated_order_decision = self.model.converter(self.module_element("sophisticated_order_decision"))
-        target_supply_line = self.model.converter(self.module_element("target_supply_line"))
+        outgoing_delivery_rate = self.converter("outgoing_delivery_rate")
+        incoming_order_rate = self.converter("incoming_order_rate")
+        total_stock = self.converter("total_stock")
+        surplus = self.converter("surplus")
+        order_decision = self.converter("order_decision")
+        naive_order_decision = self.converter("naive_order_decision")
+        sophisticated_order_decision = self.converter("sophisticated_order_decision")
+        target_supply_line = self.converter("target_supply_line")
 
         # Initial Values
 

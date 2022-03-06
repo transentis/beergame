@@ -1,5 +1,5 @@
 from BPTK_Py import sd_functions as sd
-from .module import Module
+from BPTK_Py import Module
 
 
 class PerformanceControlling(Module):
@@ -10,50 +10,50 @@ class PerformanceControlling(Module):
     def initialize(self,brewery, distributor, wholesaler, retailer, policy_settings):
         # Stocks
 
-        total_retailer_cost = self.model.stock(self.module_element("total_retailer_cost"))
-        total_supply_chain_cost = self.model.stock(self.module_element("total_supply_chain_cost"))
+        total_retailer_cost = self.stock("total_retailer_cost")
+        total_supply_chain_cost = self.stock("total_supply_chain_cost")
 
         # Flows
 
-        retailer_cost_in = self.model.flow(self.module_element("retailer_cost_in"))
-        supply_chain_cost_in = self.model.flow(self.module_element("supply_chain_cost_in"))
+        retailer_cost_in = self.flow("retailer_cost_in")
+        supply_chain_cost_in = self.flow("supply_chain_cost_in")
 
         # Converters
 
         ## Brewery
 
-        brewery_cost = self.model.converter(self.module_element("brewery_cost"))
-        brewery_backorder_cost = self.model.converter(self.module_element("brewery_backorder_cost"))
-        brewery_inventory_cost = self.model.converter(self.module_element("brewery_inventory_cost"))
+        brewery_cost = self.converter("brewery_cost")
+        brewery_backorder_cost = self.converter("brewery_backorder_cost")
+        brewery_inventory_cost = self.converter("brewery_inventory_cost")
 
         ## Distributor
 
-        distributor_cost = self.model.converter(self.module_element("distributor_cost"))
-        distributor_backorder_cost = self.model.converter(self.module_element("distributor_backorder_cost"))
-        distributor_inventory_cost = self.model.converter(self.module_element("distributor_inventory_cost"))
+        distributor_cost = self.converter("distributor_cost")
+        distributor_backorder_cost = self.converter("distributor_backorder_cost")
+        distributor_inventory_cost = self.converter("distributor_inventory_cost")
 
         ## Wholesaler
 
-        wholesaler_cost = self.model.converter(self.module_element("wholesaler_cost"))
-        wholesaler_backorder_cost = self.model.converter(self.module_element("wholesaler_backorder_cost"))
-        wholesaler_inventory_cost = self.model.converter(self.module_element("wholesaler_inventory_cost"))
+        wholesaler_cost = self.converter("wholesaler_cost")
+        wholesaler_backorder_cost = self.converter("wholesaler_backorder_cost")
+        wholesaler_inventory_cost = self.converter("wholesaler_inventory_cost")
 
         ## Retailer
 
-        retailer_cost = self.model.converter(self.module_element("retailer_cost"))
-        retailer_backorder_cost = self.model.converter(self.module_element("retailer_backorder_cost"))
-        retailer_inventory_cost = self.model.converter(self.module_element("retailer_inventory_cost"))
+        retailer_cost = self.converter("retailer_cost")
+        retailer_backorder_cost = self.converter("retailer_backorder_cost")
+        retailer_inventory_cost = self.converter("retailer_inventory_cost")
 
         ## Supply Chain
 
-        supply_chain_cost = self.model.converter(self.module_element("supply_chain_cost"))
+        supply_chain_cost = self.converter("supply_chain_cost")
 
         # Constants
 
         ## Supply Chain
 
-        cost_per_item_in_backorder = self.model.constant(self.module_element("cost_per_item_in_backorder"))
-        cost_per_item_in_inventory = self.model.constant(self.module_element("cost_per_item_in_inventory"))
+        cost_per_item_in_backorder = self.constant("cost_per_item_in_backorder")
+        cost_per_item_in_inventory = self.constant("cost_per_item_in_inventory")
 
         # Equations
 
