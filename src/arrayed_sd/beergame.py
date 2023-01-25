@@ -191,4 +191,26 @@ class Beergame(Model):
         # Should use floor
         self.sophisticated_order_decision.equation = sd.max(self.total_incoming_orders + sd.round((self.target_supply_line + self.total_incoming_orders + self.total_outgoing_orders) / policy_settings.stock_adjustment_time, 0.0), 0.0)
 
+        # Performance controlling
+        self.cost_per_item_in_backorder = self.constant("cost_per_item_in_backorder")
+        self.cost_per_item_in_backorder.equation = 1.0
+
+        self.cost_per_item_in_inventory = self.constant("cost_per_item_in_inventory")
+        self.cost_per_item_in_inventory.equation = 0.5
+
+        self.backorder_cost = self.converter("backorder_cost")
+        self.backorder_cost.equation = self.cost_per_item_in_backorder * self.backorder
+        
+        self.inventory_cost = self.converter("inventory_cost")
+        self.inventory_cost.equation = self.cost_per_item_in_inventory * sd.max(self.inventory, policy_settings.target_inventory)
+
+        self.cost = self.converter("cost")
+        self.cost.equation = self.backorder_cost + self.inventory_cost
+
+        self.monthly_cost_in = self.flow("monthly_cost_in")
+        self.monthly_cost_in.equation = self.cost["retailer"]
+
+        self.retailer_cost_acc = self.stock("retailer_cost_acc")
+        self.retailer_cost_acc.equation = self.monthly_cost_in
+
 Beergame()
